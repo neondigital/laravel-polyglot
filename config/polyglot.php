@@ -12,6 +12,11 @@ return [
      */
     'bing_api_key' => env('bing_api_key', null),
 
+    /**
+     * Set where your language files should go, you shouldn't need to change this.
+     */
+    'language_file_location' => base_path('resources/lang'),
+
     /*
     |--------------------------------------------------------------------------
     | Locales

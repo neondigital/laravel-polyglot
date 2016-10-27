@@ -19,7 +19,7 @@ class PolyglotServiceProvider extends ServiceProvider
     {
         if (!$this->isLumen()) {
             $this->publishes([
-                $this->getConfigPath() => $this->app->make('path.config') . '/polygot.php',
+                $this->getConfigPath() => $this->app->make('path.config') . '/polyglot.php',
             ], 'config');
         }
         if ($this->app->runningInConsole()) {
@@ -29,12 +29,16 @@ class PolyglotServiceProvider extends ServiceProvider
         }
     }
 
+    public function register()
+    {
+    }
+
     /**
      * @return string
      */
     protected function getConfigPath()
     {
-        return __DIR__ . '/../config/polygot.php';
+        return __DIR__ . '/../config/polyglot.php';
     }
 
     /**
