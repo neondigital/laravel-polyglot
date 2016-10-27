@@ -2,11 +2,11 @@
 
 namespace Neondigital\Polyglot;
 
-use Illuminate\Support\ServiceProvider as ServiceProvider;
 use Config;
+use Illuminate\Support\ServiceProvider as ServiceProvider;
 use Neondigital\Polyglot\Commands\MakeLanguageFilesCommand;
 
-class PolygotServiceProvider extends ServiceProvider
+class PolyglotServiceProvider extends ServiceProvider
 {
 
     /**
