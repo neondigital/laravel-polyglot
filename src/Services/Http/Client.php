@@ -25,7 +25,7 @@ abstract class Client
         $this->provider = new Google();
     }
 
-    public function getTranslatedText($config)
+    protected function getTranslatedText($config)
     {
         // If not from language is set, make set it to the current locale
         if (!isset($config['from']) || !$config['from']) {
@@ -51,16 +51,20 @@ abstract class Client
         return $config['text'];
     }
 
-    public function getDetectedLanguage($string)
+    protected function getDetectedLanguage($string)
     {
         try {
-            $request = $this->client->get($this->provider->getTranslateEndpoint(), [
+            $response = $this->client->get($this->provider->getLanguageDetectEndpoint(), [
                 'query' => $this->provider->getDetectParams($string)
             ]);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             return app()->getLocale();
         }
-        $response = $request->getResponse();
-        return $response['data']['detections']['language'];
+        $data = json_decode($response->getbody()->getContents(), true);
+
+        if (!isset($data['data']['detections'][0][0]['language'])) {
+            return app()->getLocale();
+        }
+        return $data['data']['detections'][0][0]['language'];
     }
 }
