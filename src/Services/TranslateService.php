@@ -3,8 +3,9 @@
 namespace Neondigital\Polyglot\Services;
 
 use Neondigital\Polyglot\Services\Http\Client;
+use Neondigital\Polyglot\TranslateInterface;
 
-class TranslateService extends Client
+class TranslateService extends Client implements TranslateInterface
 {
 
     public function translate($text, $lang, $from_lang = null, $html = false, $detect = false, $exit_on_error = false)
@@ -19,17 +20,25 @@ class TranslateService extends Client
             'detect' => $detect
         ]);
 
-        // if (is_array($result)) {
-        //     dd($text);
-        // } else {
-
-        // }
         $result = $this->putPlaceholdersBack($result);
 
         return $result;
     }
 
-        /**
+    public function detect($text)
+    {
+        // Swap out any :instances
+        $text = $this->replacePlaceholders($text);
+
+        $result = $this->getDetectedLanguage($text);
+
+        $result = $this->putPlaceholdersBack($result);
+
+        dd($result);
+
+        return $result;   
+    }
+    /**
      * Make the place-holder replacements on a line.
      *
      * @param  string  $line
@@ -57,19 +66,4 @@ class TranslateService extends Client
 
         return $line;
     }
-
-    // (?<=<trans-)(.*)(?=>)
-    /**
-     * Sort the replacements array.
-     *
-     * @param  array  $replace
-     * @return array
-     */
-    protected function sortReplacements(array $replace)
-    {
-        return (new Collection($replace))->sortBy(function ($value, $key) {
-            return mb_strlen($key) * -1;
-        });
-    }
-
 }
