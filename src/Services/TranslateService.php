@@ -29,13 +29,8 @@ class TranslateService extends Client implements TranslateInterface
     {
         // Swap out any :instances
         $text = $this->replacePlaceholders($text);
-
         $result = $this->getDetectedLanguage($text);
-
         $result = $this->putPlaceholdersBack($result);
-
-        dd($result);
-
         return $result;   
     }
     /**
