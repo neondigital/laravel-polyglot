@@ -31,6 +31,9 @@ class PolyglotServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->app->singleton(TranslateInterface::class, function ($app) {
+            return new \Neondigital\Polyglot\Services\TranslateService($app);
+        });
     }
 
     /**
