@@ -107,7 +107,7 @@ class MakeLanguageFilesCommand extends Command
                 // Initiate our new translations
                 $newTrans = [];
                 $this->info('');
-                $this->info('Starting translations for ' . $langKey . ' in ' . $locale);
+                $this->info('Translating ' . $langKey . ' to ' . $locale);
 
                 $bar = $this->output->createProgressBar(count($translations));
 
