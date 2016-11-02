@@ -6,7 +6,7 @@
         "Laravel Locale",
         "Laravel Polygot",
     ],
-    "homepage": "https://bitbucket.org/alecneon/laravel-polyglot/",
+    "homepage": "https://github.com/neondigital/laravel-polyglot",
     "license": "MIT",
     "require": {
         "php" : ">=5.5.9",
