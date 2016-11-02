@@ -5,7 +5,7 @@ return [
     /**
      * Set your Google api key here
      */
-    'google_api_key' => env('google_api_key', null),
+    'GOOGLE_API_KEY' => env('google_api_key', null),
 
     /**
      * Set your Bing api key here
