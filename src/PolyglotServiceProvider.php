@@ -2,11 +2,11 @@
 
 namespace Neondigital\Polyglot;
 
-use Illuminate\Support\ServiceProvider as ServiceProvider;
 use Config;
+use Illuminate\Support\ServiceProvider as ServiceProvider;
 use Neondigital\Polyglot\Commands\MakeLanguageFilesCommand;
 
-class PolygotServiceProvider extends ServiceProvider
+class PolyglotServiceProvider extends ServiceProvider
 {
 
     /**
@@ -19,7 +19,7 @@ class PolygotServiceProvider extends ServiceProvider
     {
         if (!$this->isLumen()) {
             $this->publishes([
-                $this->getConfigPath() => $this->app->make('path.config') . '/polygot.php',
+                $this->getConfigPath() => $this->app->make('path.config') . '/polyglot.php',
             ], 'config');
         }
         if ($this->app->runningInConsole()) {
@@ -29,12 +29,19 @@ class PolygotServiceProvider extends ServiceProvider
         }
     }
 
+    public function register()
+    {
+        $this->app->singleton(TranslateInterface::class, function ($app) {
+            return new \Neondigital\Polyglot\Services\TranslateService($app);
+        });
+    }
+
     /**
      * @return string
      */
     protected function getConfigPath()
     {
-        return __DIR__ . '/../config/polygot.php';
+        return __DIR__ . '/../config/polyglot.php';
     }
 
     /**
