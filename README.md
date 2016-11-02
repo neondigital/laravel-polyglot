@@ -20,12 +20,6 @@ Via Composer
 $ composer require neondigital/laravel-polyglot
 ```
 
-## Usage
-
-``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
-```
 
 ## Change log
 
