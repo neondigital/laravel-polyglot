@@ -111,7 +111,12 @@ class MakeLanguageFilesCommand extends Command
 
                 $bar = $this->output->createProgressBar(count($translations));
 
+                if (!is_array($translations)) {
+                    continue;
+                }
+
                 foreach ($translations as $key => $translation) {
+
                     // Does this translation exists already?
                     $transExists = trans()->hasForLocale($langKey . '.' . $key, $locale);
 
@@ -131,7 +136,7 @@ class MakeLanguageFilesCommand extends Command
                                 }
                             }
                        }
-                    }elseif (!$transExists) {
+                    } elseif (!$transExists) {
                         $newTrans[$key] = $this->getTranslatedString($translation, $locale);
                     }
 
